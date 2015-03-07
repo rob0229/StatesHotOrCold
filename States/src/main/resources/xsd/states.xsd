@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    targetNamespace="http://www.example.com" 
+     xmlns="http://www.example.com" 
+     xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:simpleType name="myEnumSimpleType">
+     <xs:restriction base="xs:string">
+        <xs:maxLength value="1"/>
+        <xs:enumeration value="alaska"/>
+        <xs:enumeration value="alabama"/>
+        <xs:enumeration value="arkansas"/>
+        <xs:enumeration value="arizona"/>
+        <xs:enumeration value="california"/>
+        <xs:enumeration value="colorado"/>
+        <xs:enumeration value="connecticut"/>
+        <xs:enumeration value="washington dc"/>
+        <xs:enumeration value="delaware"/>
+        <xs:enumeration value="florida"/>
+        <xs:enumeration value="georgia"/>
+        <xs:enumeration value="hawaii"/>
+        <xs:enumeration value="iowa"/>
+        <xs:enumeration value="idaho"/>
+        <xs:enumeration value="illinois"/>
+        <xs:enumeration value="indiana"/>
+        <xs:enumeration value="kansas"/>
+        <xs:enumeration value="kentucky"/>
+        <xs:enumeration value="louisiana"/>
+        <xs:enumeration value="massachusetts"/>
+        <xs:enumeration value="maryland"/>
+        <xs:enumeration value="maine"/>
+        <xs:enumeration value="michigan"/>
+        <xs:enumeration value="minnesota"/>
+        <xs:enumeration value="missouri"/>
+        <xs:enumeration value="mississippi"/>
+        <xs:enumeration value="montana"/>
+        <xs:enumeration value="north carolina"/>
+        <xs:enumeration value="north dakota"/>
+        <xs:enumeration value="nebraska"/>
+        <xs:enumeration value="new hampshire"/>
+        <xs:enumeration value="new jersey"/>
+        <xs:enumeration value="new mexio"/>
+        <xs:enumeration value="nevada"/>
+        <xs:enumeration value="new york"/>
+        <xs:enumeration value="ohio"/>
+        <xs:enumeration value="oklahoma"/>
+        <xs:enumeration value="oregon"/>
+        <xs:enumeration value="pennsylvania"/>
+        <xs:enumeration value="rhode island"/>
+        <xs:enumeration value="south carolina"/>
+        <xs:enumeration value="south dakota"/>
+        <xs:enumeration value="tennessee"/>
+        <xs:enumeration value="texas"/>
+        <xs:enumeration value="utah"/>
+        <xs:enumeration value="virginia"/>
+        <xs:enumeration value="vermont"/>
+        <xs:enumeration value="washington"/>
+        <xs:enumeration value="wisconsin"/>
+        <xs:enumeration value="west virginia"/>
+        <xs:enumeration value="wyoming"/>
+     </xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="myClass"> 
+	    <xs:complexType>
+	        <xs:attribute name="myEnum" type="myEnumSimpleType"/>
+	    </xs:complexType>
+	</xs:element>
+</xs:schema>
+
+
