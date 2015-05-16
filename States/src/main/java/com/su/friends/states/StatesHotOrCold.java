@@ -8,19 +8,19 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 
 import com.gen.code.MyEnumSimpleType;
 
 
 public class StatesHotOrCold {
-
+	public static String filename = "statesAdjacencyList.txt";
+	//ClassLoader cl = getClass().getClassLoader();
 	public static void main(String[] args) throws JAXBException {
 		boolean win = false;
 		int numGuess = 0;
@@ -33,7 +33,7 @@ public class StatesHotOrCold {
 		StatesGraph graph;
 		
 		try{
-			 graph = createGraph();
+			 graph = new StatesHotOrCold().createGraph();
 			 Scanner keyboard = new Scanner(System.in);
 			
 				System.out.println("Enter a state name. ex. Arizona");
@@ -73,19 +73,27 @@ public class StatesHotOrCold {
 		}	
 	}
 
-	private static StatesGraph createGraph() throws FileNotFoundException,
+	private StatesGraph createGraph() throws FileNotFoundException,
 			IOException, JAXBException {
 		String data;
 		int num_verticies;
 		String[] edges;
 		StatesGraph graph;
-		BufferedReader in = new BufferedReader(new FileReader(new File("//Users//Matt//Documents//workspace//JAXB Code//States//src//main//resources//statesAdjacencyList.txt")));
-		 data = in.readLine();
+		BufferedReader in  = new BufferedReader(new FileReader(getClass().getClassLoader().
+				getResource(filename).getFile()));
+		
+		data = in.readLine();
+		//System.out.println(data);
+		 
 		 num_verticies = Integer.parseInt(data);
+		 
 		 data = in.readLine();
-
+		 //System.out.println("doesn't do anything with this"+data);
+		 
 		 graph = new StatesGraph(num_verticies);
 		 data = in.readLine();
+		 //System.out.println(data);
+		 
 		 
 		 while(data != null){
 			 edges = data.split(" ");
@@ -171,7 +179,7 @@ public class StatesHotOrCold {
 			try{
 				String line = "";
 				PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("scoreList.temp")));
-				BufferedReader in = new BufferedReader(new FileReader(new File("//Users//Matt//Documents//workspace//JAXB Code//States//src//main//resources//scoreList.txt")));
+				BufferedReader in = new BufferedReader(new FileReader(new File("//Users//Matt//git//StatesHotOrCold//States//src//main//resources//scoreList.txt")));
 				int lineNum = 1;
 				String temp = "";
 				while((line = in.readLine()) != null && lineNum <11){
@@ -204,7 +212,7 @@ public class StatesHotOrCold {
 		}
 		
 		try{
-		 BufferedReader in = new BufferedReader(new FileReader(new File("//Users//Matt//Documents//workspace//JAXB Code//States//src//main//resources//scoreList.txt")));
+		 BufferedReader in = new BufferedReader(new FileReader(new File("//Users//Matt//git//StatesHotOrCold//States//src//main//resources//scoreList.txt")));
 		 System.out.println("The High Scores are: ");
 		 for(int i = 1; i < 11; i++){
 			 String data = in.readLine();
