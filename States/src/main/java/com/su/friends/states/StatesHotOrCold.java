@@ -20,7 +20,7 @@ import com.gen.code.MyEnumSimpleType;
 
 public class StatesHotOrCold {
 	public static String filename = "statesAdjacencyList.txt";
-	//ClassLoader cl = getClass().getClassLoader();
+	
 	public static void main(String[] args) throws JAXBException {
 		boolean win = false;
 		int numGuess = 0;
