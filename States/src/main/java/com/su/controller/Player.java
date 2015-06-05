@@ -11,19 +11,13 @@ public class Player {
 	public String getPlayerName() {
 		return playerName;
 	}
-
 	public void setPlayerName(String playerName) {
 		this.playerName = playerName;
 	}
-
 	public String getPlayerChoice() {
 		return playerChoice;
 	}
-
 	public void setPlayerChoice(String playerChoice) {
 		this.playerChoice = playerChoice;
 	}
-
-	
-	
 }

@@ -20,6 +20,7 @@
 	
 	<input type="submit" value="Start Playing!"/>
 	</form>
+	<textarea name="message_display" default="stuff should display here">Hello world, I am alive, feed me porn</textarea>
 </body>
 
 
