@@ -1,3 +1,8 @@
+/*
+ * This class is used to generate the random state and compare a user inputed guess
+ * 
+ * 
+ * */
 package com.su.friends.states;
 
 import java.io.BufferedReader;
@@ -20,125 +25,102 @@ import com.gen.code.MyEnumSimpleType;
 
 public class StatesHotOrCold {
 	public String filename = "statesAdjacencyList.txt";
+	//create an empty adjacency matrix
+	StatesGraph graph;
+	//The computer generated random state
+	int randState = randInt(1,51);
+	//Number of guesses so far
+	int numGuess = 0;
+	//Win tracker
+	boolean win = false;
+	//Variable to track the distance
+	int distance =-1;
 	
 	public void init() throws JAXBException {
-		boolean win = false;
-		int numGuess = 0;
-		int guess;
-		String guessString = "";
-		String result ="";
-		String message = "";
-		int randState = randInt(1,51);
-		//System.out.println("State is: " + randState);
-		int distance =-1;
-		//create an empty adjacency matrix
-		StatesGraph graph;
 		
 		try{
 			 graph = new StatesHotOrCold().createGraph();
-			// Scanner keyboard = new Scanner(System.in);
-			
-				message = "Enter a state name. ex. Arizona";
-				//guessString = keyboard.nextLine();
-				
-				guess = getGuessInt(guessString);
-				
-				while(guess == 0 ){
-					//set the browser message to this...
-					result = "That is not a valid state, enter a state name. ex. Arizona";
-					//guessString = keyboard.nextLine();
-					//TODO: set guess string to value from browser
-					guess = getGuessInt(guessString);
-				}		
-				numGuess++;
-			while (win == false){
-				if (guess == randState)
-				{
-					win = true;
-				}else{
-					distance = getDistance(guess, randState, graph);
-					howCloseisGuess(distance);
-					
-					message ="Enter a state name. ex. Arizona";
-				//	guessString = keyboard.nextLine();
-					guess = getGuessInt(guessString);
-					while(guess == 0 ){
-						result = "That is not a valid state, enter a state name. ex. Arizona";
-					//	guessString = keyboard.nextLine();
-						guess = getGuessInt(guessString);
-					}		
-					numGuess++;
-				}
-			}
-			if(win){
-				result = "You Win!!!!!!! It took you "+numGuess+" Guesses";
-			}
-				//keyboard.close();
 		}catch(IOException e){
 			e.printStackTrace();
-		}	
+		}		
+//				while(guess == 0 ){
+//					//set the browser message to this...
+//					result = "That is not a valid state, enter a state name. ex. Arizona";
+//					//guessString = keyboard.nextLine();
+//					//TODO: set guess string to value from browser
+//					guess = getGuessInt(guessString);
+//				}		
+//				numGuess++;
+//			while (win == false){
+//				if (guess == randState)
+//				{
+//					win = true;
+//				}else{
+//					distance = getDistance(guess, randState, graph);
+//					howCloseisGuess(distance);
+//					
+//					message ="Enter a state name. ex. Arizona";
+//				//	guessString = keyboard.nextLine();
+//					guess = getGuessInt(guessString);
+//					while(guess == 0 ){
+//						result = "That is not a valid state, enter a state name. ex. Arizona";
+//					//	guessString = keyboard.nextLine();
+//						guess = getGuessInt(guessString);
+//					}		
+//					numGuess++;
+//				}
+//			}
+//			if(win){
+//				result = "You Win!!!!!!! It took you "+numGuess+" Guesses";
+//			}
+//				//keyboard.close();
+//		}catch(IOException e){
+//			e.printStackTrace();
+//		}	
 	}
 
-	private StatesGraph createGraph() throws FileNotFoundException,
-			IOException, JAXBException {
+	private StatesGraph createGraph() throws FileNotFoundException,IOException, JAXBException {
 		String data;
 		int num_verticies;
 		String[] edges;
 		StatesGraph graph;
-		BufferedReader in  = new BufferedReader(new FileReader(getClass().getClassLoader().
-				getResource(filename).getFile()));
+		BufferedReader in  = new BufferedReader(new FileReader(getClass().getClassLoader().getResource(filename).getFile()));
 		
 		data = in.readLine();
-		//System.out.println(data);
-		 
-		 num_verticies = Integer.parseInt(data);
-		 
-		 data = in.readLine();
-		 //System.out.println("doesn't do anything with this"+data);
-		 
-		 graph = new StatesGraph(num_verticies);
-		 data = in.readLine();
-		 //System.out.println(data);
-		 
-		 
-		 while(data != null){
-			 edges = data.split(" ");
+		num_verticies = Integer.parseInt(data);
+		data = in.readLine();
+		
+		graph = new StatesGraph(num_verticies);
+		data = in.readLine();
+		while(data != null){
+			edges = data.split(" ");
 			int v = Integer.parseInt(edges[0].trim());
 			int e = Integer.parseInt(edges[1].trim());
 			 graph.setEdge(v,e);
 			 data = in.readLine();
 		 }
-		// System.out.println("All Items Added");
 		 in.close();
 		return graph;
 	}
 
-	private String howCloseisGuess(int distance) {
-		switch(distance){
-		case 1:
-			return "You are HOT! " + distance;
-		case 2:
-			return "You are warm " + distance;
-		case 3:
-			return "You are cold " + distance;
-		default:
-			return "You are Freezing! " + distance;
-		}
-	}
-
-	
 	//returns the minimum number of connections between 2 states 
-	public int getDistance(int guess, int actual, StatesGraph graph){
+	public int getDistance(String g){
+		int guess = getGuessInt(g);
+		if(guess == 0){
+			//error
+			return -1;
+		}
+		
 		List<Integer> lvl1, lvl2, lvl3;
 		lvl1= graph.getEdge(guess);
 		//Check 1st level depth
-		if(lvl1.contains(actual)){		
+		if(lvl1.contains(randState)){		
 			return 1;
 		}else {
 			//check second level depth
 			for(int i = 0; i < lvl1.size(); i++){
 				lvl2 = graph.getEdge(lvl1.get(i));
-				if(lvl2.contains(actual)){
+				if(lvl2.contains(randState)){
 					return 2;
 				}
 			}
@@ -147,7 +129,7 @@ public class StatesHotOrCold {
 				lvl2 = graph.getEdge(lvl1.get(i));
 				for(int x = 0; x < lvl2.size(); x++){
 					lvl3 = graph.getEdge(lvl2.get(x));
-					if(lvl3.contains(actual)){
+					if(lvl3.contains(randState)){
 						return 3;
 					}
 				}
@@ -155,6 +137,7 @@ public class StatesHotOrCold {
 		}
 			return 4;
 	}
+	
 	
 	//Generates a random integer for the random states
 	public int randInt(int min, int max) {
@@ -164,7 +147,7 @@ public class StatesHotOrCold {
 	}
 	
 	//Converts users string guess into an integer for checking
-		public int getGuessInt(String state){
+	public int getGuessInt(String state){
 			try {
 				MyEnumSimpleType enumer =  MyEnumSimpleType.fromValue(state);
 				int i = enumer.ordinal();
@@ -174,12 +157,9 @@ public class StatesHotOrCold {
 					ie.printStackTrace();
 				}
 			return 0;
-		}
+	}
 		
-	//Sets the browser message
-		public void setMessage(String message){
-			//do something here
-		}
+}
 	
 	//Displays the high score list and updates it if the user is in the top 10
 //	public static void highScore(int score){
@@ -239,5 +219,4 @@ public class StatesHotOrCold {
 //		}
 //	}
 //	
-	
-}
+
