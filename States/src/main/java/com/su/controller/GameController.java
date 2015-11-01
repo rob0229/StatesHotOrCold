@@ -1,6 +1,5 @@
 package com.su.controller;
 
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -21,15 +20,27 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class GameController {
 	
-	@RequestMapping(value="/GuessingGame.html", method = RequestMethod.GET)
+	@RequestMapping(value="/home.html", method = RequestMethod.GET)
 	public ModelAndView getAdmissionForm(){
-		ModelAndView model = new ModelAndView("GuessingGame");
+		ModelAndView model = new ModelAndView("Home");
 		return model;
 	}
 	
 	@ModelAttribute
 	public void addingStupidAttr(Model model){
 		model.addAttribute("headerMessage", "Hot Or Cold!");
+	}
+	
+	@RequestMapping(value="/guessingGame.html", method = RequestMethod.POST)
+	public ModelAndView 	goToGuessingGame(){
+		ModelAndView model;
+		
+			 model = new ModelAndView("GuessingGame");
+			 return model;
+		}
+		model = new ModelAndView("Game");
+		model.addObject("player", player);
+		return model;
 	}
 	
 	@RequestMapping(value="/submitGameForm.html", method = RequestMethod.POST)

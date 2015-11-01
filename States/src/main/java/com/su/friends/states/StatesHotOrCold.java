@@ -17,7 +17,6 @@ import javax.xml.bind.JAXBException;
 
 import com.gen.code.MyEnumSimpleType;
 
-
 public class StatesHotOrCold {
 	public String filename = "statesAdjacencyList.txt";
 	
