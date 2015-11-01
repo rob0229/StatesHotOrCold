@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.su.friends.states.StatesHotOrCold;
+
 @Controller
 public class GameController {
 	
@@ -52,6 +54,12 @@ public class GameController {
 		}
 		model = new ModelAndView("Game");
 		model.addObject("player", player);
+		
+		//get correct answer and adjacency matrix 
+		StatesHotOrCold game = new StatesHotOrCold();
+		
+		//int distance = game.getDistance(guess);
+		
 		return model;
 	}
 	

@@ -1,5 +1,5 @@
 #!/bin/sh
-cd /Users/rob0229/git/StatesHotOrCold/States
+cd /Users/Rob/git/StatesHotOrCold/States
 mvn clean install
 cd /Developer/apache-tomcat-7.0.61/webapps
 ./../bin/shutdown.sh

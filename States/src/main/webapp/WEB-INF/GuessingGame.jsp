@@ -1,9 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<html>
-<header>
-<%@ page isELIgnored="false" %>
-</header>
-<body>
+<jsp:include page="header.jsp" />
 	<h1>
 		${headerMessage}
 	</h1>
@@ -18,10 +14,13 @@
 	
 	
 	
-	<input type="submit" value="Start Playing!"/>
+	<input type="submit" id="startPlayingBtn" value="Start Playing!"/>
 	</form>
-	<textarea name="message_display" default="stuff should display here">Hello world, I am alive, feed me porn</textarea>
-</body>
-
-
-</html>
+	<textarea name="message_display" default="stuff should display here">Hello world, I am alive, feed me</textarea>
+	<script>
+		$("#startPlayingBtn").on("click",function(){
+			console.log("Clicked startPlaying BTN");
+		});
+	
+	</script>
+<jsp:include page="footer.jsp" />
